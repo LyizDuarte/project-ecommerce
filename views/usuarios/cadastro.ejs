@@ -1,0 +1,54 @@
+<script src="/js/usuarios/cadastrar.js"></script>
+<div class="container">
+    <h1>Cadastro de Usuários</h1>
+    <div>
+        <% if (typeof msg != "undefined") { %>             
+            <span  ><%= msg %></span>
+        <% } %>
+    </div>
+    <div>
+        <div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioEmail" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="usuarioEmail" name="usuarioEmail">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioSenha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="usuarioSenha" name="usuarioSenha">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioNome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="usuarioNome" name="usuarioNome">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioPerfil" class="form-label">Perfil:</label>
+                    <select class="form-control" id="usuarioPerfil" name="usuarioPerfil">
+                        <option selected value="0">Selecione...</option>
+                        <% for(let i = 0; i<listaPerfil.length; i++) { %>
+                            <option value="<%= listaPerfil[i].perfilId %>"><%= listaPerfil[i].perfilDescricao %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="usuarioAtivo" name="usuarioAtivo">
+                    <label class="form-check-label" for="usuarioAtivo">
+                        Ativo
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnCadastrar" type="button">Cadastrar</button>
+                <a class="btn btn-secondary" href="/usuarios">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<script src="/js/usuarios/alterar.js"></script>
+<div class="container">
+    <h1>Alteração de Usuários</h1>
+    <div>
+        <% if (typeof msg != "undefined") { %>             
+            <span  ><%= msg %></span>
+        <% } %>
+    </div>
+    <div>
+        <div>
+            <input id="usuarioId" hidden value="<%= usuario.usuarioId %>">
+            <div>
+                <div class="form-group">
+                    <label for="usuarioEmail" class="form-label">Email</label>
+                    <input value="<%= usuario.usuarioEmail %>" type="text" class="form-control" id="usuarioEmail" name="usuarioEmail">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioSenha" class="form-label">Senha</label>
+                    <input value="<%= usuario.usuarioSenha %>" type="password" class="form-control" id="usuarioSenha" name="usuarioSenha">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioNome" class="form-label">Nome</label>
+                    <input value="<%= usuario.usuarioNome %>" type="text" class="form-control" id="usuarioNome" name="usuarioNome">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="usuarioPerfil" class="form-label">Perfil:</label>
+                    <select class="form-control" id="usuarioPerfil" name="usuarioPerfil">
+                        <option value="0">Selecione...</option>
+                        <% for(let i = 0; i<listaPerfil.length; i++) { %>
+                            <% if(usuario.perfilId == listaPerfil[i].perfilId) { %>
+                                <option selected value="<%= listaPerfil[i].perfilId %>"><%= listaPerfil[i].perfilDescricao %></option>
+                            <% } else { %>
+                                <option value="<%= listaPerfil[i].perfilId %>"><%= listaPerfil[i].perfilDescricao %></option>
+                            <% } %>
+                        <% } %>
+
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-check">
+                    <% if (usuario.usuarioAtivo == 1) { %>
+                        <input checked class="form-check-input" type="checkbox" id="usuarioAtivo" name="usuarioAtivo">
+                    <% } else { %>
+                        <input class="form-check-input" type="checkbox" id="usuarioAtivo" name="usuarioAtivo">
+                    <% } %>
+                    <label class="form-check-label" for="usuarioAtivo">
+                        Ativo
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnAlterar" type="button">Alterar</button>
+                <a class="btn btn-secondary" href="/usuarios">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>

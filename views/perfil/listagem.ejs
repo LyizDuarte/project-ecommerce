@@ -1,0 +1,18 @@
+<h1>Perfis cadastrados</h1>
+<br><br>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <th>Id</th>
+            <th>Nome</th>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i<listaPerfil.length; i++) { %>
+                <tr>
+                    <td><%= listaPerfil[i].perfilId %></td>
+                    <td><%= listaPerfil[i].perfilDescricao %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
