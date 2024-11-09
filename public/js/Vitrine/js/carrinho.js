@@ -79,11 +79,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (lista.length == 0) {
         localStorage.removeItem("carrinho")
+        atualizaContador()
       } else {
         localStorage.setItem("carrinho", JSON.stringify(lista))
         montarCarrinho()
       }
-      
     } else {
       document.getElementById("corpoCarrinho").innerHTML =
         "<h3>Carrinho vazio!</h3>"
