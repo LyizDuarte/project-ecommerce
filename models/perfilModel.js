@@ -40,7 +40,7 @@ class PerfilModel {
             let perfil = new PerfilModel()
 
             perfil.perfilId = rows[i]["per_id"];
-            perfil.perfilDescricao = rows[i]["per_nome"]
+            perfil.perfilDescricao = rows[i]["per_descricao"]
 
             lista.push(perfil);
         }
