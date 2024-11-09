@@ -63,7 +63,7 @@ function alterarProduto() {
         data.append("valor", inputValor.value);
         data.append("imagem", inputFile);
 
-        fetch('/produto/alterar', {
+        fetch('/admin/produto/alterar', {
             method: "POST",
             body: data
         })

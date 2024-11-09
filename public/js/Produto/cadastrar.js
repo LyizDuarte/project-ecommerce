@@ -60,7 +60,7 @@ function gravarProduto() {
         data.append("valor", inputValor.value);
         data.append("imagem", inputFile);
 
-        fetch('/produto/cadastro', {
+        fetch('/admin/produto/cadastro', {
             method: "POST",
             body: data
         })

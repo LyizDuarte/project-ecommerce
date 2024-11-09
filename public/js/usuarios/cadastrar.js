@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 perfil: perfil,
             }
 
-            fetch("/usuarios/cadastrar", {
+            fetch("/admin/usuarios/cadastrar", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
