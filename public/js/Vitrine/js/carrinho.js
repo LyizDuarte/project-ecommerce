@@ -9,6 +9,51 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", adicionarAoCarrinho)
   }
 
+  function alterarQuantidadeProduto(produtoId, novaQuantidade) {
+    const lista = JSON.parse(carrinho)
+    //define limites de quantidade
+    if (novaQuantidade < 0) novaQuantidade = 0
+    else if (novaQuantidade > 999) novaQuantidade = 999
+
+    document.querySelector(`input[data-produto='${produtoId}']`).value =
+      novaQuantidade
+    let valorTotal = 0
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i].produtoId == produtoId) {
+        lista[i].quantidade = novaQuantidade
+      }
+      //calcular o valor total
+      valorTotal += lista[i].produtoValor * lista[i].quantidade
+    }
+    //atualizar interface com novo valor total
+    document.getElementById("valorTotal").innerText =
+      "Valor Total: R$ " + valorTotal
+
+    //persistir o carrinho no localStorage
+    localStorage.setItem("carrinho", JSON.stringify(lista))
+  }
+
+  function aumentarQuantidade() {
+    let produto = this.dataset.produto
+    carrinho = localStorage.getItem("carrinho")
+    const lista = JSON.parse(carrinho)
+    const produtoEncontrado = lista.find((x) => x.produtoId == produto)
+    alterarQuantidadeProduto(
+      produtoEncontrado.produtoId,
+      ++produtoEncontrado.quantidade
+    )
+  }
+  function diminuirQuantidade() {
+    let produto = this.dataset.produto
+    carrinho = localStorage.getItem("carrinho")
+    const lista = JSON.parse(carrinho)
+    const produtoEncontrado = lista.find((x) => x.produtoId == produto)
+    alterarQuantidadeProduto(
+      produtoEncontrado.produtoId,
+      --produtoEncontrado.quantidade
+    )
+  }
+
   function atualizaContador() {
     carrinho = localStorage.getItem("carrinho")
     const lista = JSON.parse(carrinho)
@@ -46,7 +91,14 @@ document.addEventListener("DOMContentLoaded", function () {
                       <td>${lista[i].marcaNome} </td>
                       <td>${lista[i].categoriaNome} </td>
                       <td>${lista[i].produtoValor} </td>
-                      <td>${lista[i].quantidade} </td>
+                      <td>
+                        <div style="display: flex;">
+                          <button data-produto="${lista[i].produtoId}" class="btnAdd btn btn-default"> + </button>
+                          <input data-produto="${lista[i].produtoId}" value='${lista[i].quantidade}' type='number' class='form-control inputQtd' style='width: 75px;' />
+                          <button data-produto="${lista[i].produtoId}" class="btnDiminuir btn btn-default"> - </button>
+                        </div>
+                      </td>
+                      
                       <td>
                         <button class='btnExcluirCarrinho btn btn-danger' data-produto="${lista[i].produtoId}"><i class='fas fa-trash'></i></button>
                       </td>
@@ -56,17 +108,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 </table>`
 
       html += `<div> 
-                 <h4 style="text-align: end;">Valor Total R$ ${valorTotal}</h4>          
+                 <h4 id="valorTotal" style="text-align: end;">Valor Total: R$ ${valorTotal}</h4>          
                </div>`
       document.getElementById("corpoCarrinho").innerHTML = html
-
-      const btnExcluir = document.querySelectorAll(".btnExcluirCarrinho")
-
-      for (const btn of btnExcluir) {
-        btn.addEventListener("click", excluirProduto)
-      }
+      //inicializa os eventos do botao ao inicializar o html
+      inicializarEventos()
     } else {
       //se nao exibe a mensagem de carrinho vazio
+    }
+  }
+
+  function inicializarEventos() {
+    const btnExcluir = document.querySelectorAll(".btnExcluirCarrinho")
+    for (const btn of btnExcluir) {
+      btn.addEventListener("click", excluirProduto)
+    }
+
+    const btnAdicionar = document.querySelectorAll(".btnAdd")
+    for (const btn of btnAdicionar) {
+      btn.addEventListener("click", aumentarQuantidade)
+    }
+
+    const btnDiminuir = document.querySelectorAll(".btnDiminuir")
+    for (const btn of btnDiminuir) {
+      btn.addEventListener("click", diminuirQuantidade)
+    }
+
+    const inputQtd = document.querySelectorAll(".inputQtd")
+    for (const btn of inputQtd) {
+      btn.addEventListener("change", function () {
+        let produto = this.dataset.produto
+        let valor = this.value
+        alterarQuantidadeProduto(produto, valor)
+      })
     }
   }
 
