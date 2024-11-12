@@ -29,6 +29,12 @@ class PedidoController {
     }
     res.send({ ok: ok, msg: msg })
   }
+
+  async listar(req, res) {
+    let pedidoItemModel = new PedidoItemModel()
+    let lista = await pedidoItemModel.listar()
+    res.render("Pedido/listagem", {lista})
+  }
 }
 
 module.exports = PedidoController
