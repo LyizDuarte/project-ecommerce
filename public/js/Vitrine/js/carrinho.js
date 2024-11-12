@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", adicionarAoCarrinho)
   }
 
+  const btnConfirmarPedido = document.getElementById("btnConfirmarPedido")
+  btnConfirmarPedido.addEventListener("click", gravarPedido)
+
   function alterarQuantidadeProduto(produtoId, novaQuantidade) {
     const lista = JSON.parse(carrinho)
     //define limites de quantidade
@@ -204,5 +207,30 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((e) => {
         console.error(e)
       })
+  }
+  function gravarPedido() {
+    carrinho = localStorage.getItem("carrinho")
+    if (carrinho && carrinho != "") {
+      fetch("/pedido/gravar", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: carrinho,
+      })
+        .then((r) => {
+          return r.json()
+        })
+        .then((r) => {
+          if (r.ok) {
+            alert(r.msg)
+            localStorage.removeItem("carrinho")
+            window.location.reload()
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 })
