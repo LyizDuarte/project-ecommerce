@@ -4,14 +4,16 @@
     <table class="table table-striped">
         <thead>
             <th>Pedido ID</th>
+            <th style="display: flex; justify-content: center;">Data</th>
             <th>Produto ID</th>
             <th>Quantidade</th>
             <th>Valor Total</th>
         </thead>
         <tbody>
-            <% for(let i = 0; i<lista.length; i++) { %>
+            <% for(let i = 0; i<lista.length && i<data.length; i++) { %>
                 <tr>
                     <td><%= lista[i].pedidoId %></td>
+                    <td><%= data[i].pedidoData %></td>
                     <td><%= lista[i].produtoId %></td>
                     <td><%= lista[i].pedidoItemQuantidade %></td>
                     <td><%= lista[i].pedidoItemValorTotal %></td>

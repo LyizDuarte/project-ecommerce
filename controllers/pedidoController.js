@@ -31,9 +31,11 @@ class PedidoController {
   }
 
   async listar(req, res) {
+    let pedidoModel = new PedidoModel()
     let pedidoItemModel = new PedidoItemModel()
     let lista = await pedidoItemModel.listar()
-    res.render("Pedido/listagem", {lista})
+    let data = await pedidoModel.listar()
+    res.render("Pedido/listagem", { lista, data })
   }
 }
 
