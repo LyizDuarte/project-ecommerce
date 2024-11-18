@@ -1,22 +1,25 @@
-<h1>Pedidos</h1>
-<br><br>
-<div>
-    <table class="table table-striped">
+
+<h1>Pedidos Realizados</h1>
+
+<div class="table-responsive">
+    <table id="tabelaPedidos" class="table table-striped">
         <thead>
-            <th>Pedido ID</th>
-            <th style="display: flex; justify-content: center;">Data</th>
-            <th>Produto ID</th>
+            <th>Nº Pedido</th>
+            <th>Data do pedido</th>
+            <th>Produto</th>
+            <th>Valor unitário</th>
             <th>Quantidade</th>
-            <th>Valor Total</th>
+            <th>Valor total</th>
         </thead>
         <tbody>
-            <% for(let i = 0; i<lista.length && i<data.length; i++) { %>
+            <% for(let i = 0; i<pedidos.length; i++) { %>
                 <tr>
-                    <td><%= lista[i].pedidoId %></td>
-                    <td><%= data[i].pedidoData %></td>
-                    <td><%= lista[i].produtoId %></td>
-                    <td><%= lista[i].pedidoItemQuantidade %></td>
-                    <td><%= lista[i].pedidoItemValorTotal %></td>
+                    <td><%= pedidos[i].pedidoId %></td>
+                    <td><%= pedidos[i].pedidoData.toLocaleString() %></td>
+                    <td><%= pedidos[i].produtoNome %></td>
+                    <td>R$<%= pedidos[i].pedidoItemValor %></td>
+                    <td><%= pedidos[i].pedidoItemQuantidade %></td>
+                    <td>R$<%= pedidos[i].pedidoItemValorTotal %></td>
                 </tr>
             <% } %>
         </tbody>
