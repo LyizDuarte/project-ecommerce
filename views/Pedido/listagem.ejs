@@ -12,14 +12,14 @@
             <th>Valor total</th>
         </thead>
         <tbody>
-            <% for(let i = 0; i<pedidos.length; i++) { %>
+            <% for(let i = 0; i<listaPedidos.length; i++) { %>
                 <tr>
-                    <td><%= pedidos[i].pedidoId %></td>
-                    <td><%= pedidos[i].pedidoData.toLocaleString() %></td>
-                    <td><%= pedidos[i].produtoNome %></td>
-                    <td>R$<%= pedidos[i].pedidoItemValor %></td>
-                    <td><%= pedidos[i].pedidoItemQuantidade %></td>
-                    <td>R$<%= pedidos[i].pedidoItemValorTotal %></td>
+                    <td><%= listaPedidos[i].pedidoId %></td>
+                    <td><%= listaPedidos[i].pedidoData %></td>
+                    <td><%= listaPedidos[i].produtoNome %></td>
+                    <td>R$<%= listaPedidos[i].pedidoItemValor %></td>
+                    <td><%= listaPedidos[i].pedidoItemQuantidade %></td>
+                    <td>R$<%= listaPedidos[i].pedidoItemValorTotal %></td>
                 </tr>
             <% } %>
         </tbody>
