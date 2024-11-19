@@ -1,3 +1,4 @@
+const ProdutoModel = require("../models/produtoModel")
 const PedidoModel = require("../models/pedidoModel")
 const PedidoItemModel = require("../models/pedidoItemModel")
 class PedidoController {
@@ -61,6 +62,15 @@ class PedidoController {
     let pedidoItemModel = new PedidoItemModel()
     let listaPedidos = await pedidoItemModel.listarPedidos()
     res.render("Pedido/listagem", { listaPedidos })
+  }
+
+  async listarComBusca(req, res) {
+    let pedidoItem = new PedidoItemModel()
+    let pedidos = await pedidoItem.listarPedidos(
+      req.body.termo,
+      req.body.tipoBusca
+    )
+    res.send({ listaFiltrada: pedidos })
   }
 }
 
