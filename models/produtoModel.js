@@ -99,6 +99,16 @@ class ProdutoModel {
     this.#produtoImagem = produtoImagem
   }
 
+  async validarEstoque(produtoId, quantidade) {
+    let sql =
+      "select * from tb_produto where prd_id = ? and prd_quantidade >= ?"
+    let valores = [produtoId, quantidade]
+
+    let rows = await conexao.ExecutaComando(sql, valores)
+
+    return rows.length > 0
+  }
+
   async excluir(codigo) {
     let sql = "delete from tb_produto where prd_id = ?"
     let valores = [codigo]

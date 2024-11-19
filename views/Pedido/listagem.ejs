@@ -1,7 +1,29 @@
+<script src="/js/Pedido/listar.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<link media="print" href="/css/print.css" rel="stylesheet"> </link>
 
 <h1>Pedidos Realizados</h1>
 
-<div class="table-responsive">
+<div class="print">
+<div class="form-group">
+    <label>Termo de busca: </label>
+    <input type="text" class="form-control" id="inputBusca">
+</div>
+<div class="form-group">
+    <label>Escolha o tipo de busca: </label>
+    <label><input value="numero" type="radio" name="tipoBusca"/> Número do pedido </label>
+    <label><input  value="produto" type="radio" name="tipoBusca"/> Nome do produto </label>
+</div>
+<div class="form-group">
+    <button class="btn btn-primary" id="btnBuscar"><i class="fas fa-search"></i>Buscar</button>
+</div>
+
+<div style="text-align: end; margin-bottom: 10px;">
+    <button class="btn btn-primary" id="btnExportarExcel"><i class="fas fa-file"></i> Exportar para Excel</button>
+    <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-file"></i> Exportar para PDF</button>
+</div>
+</div>
+<div class="table-responsive"> 
     <table id="tabelaPedidos" class="table table-striped">
         <thead>
             <th>Nº Pedido</th>
@@ -15,7 +37,7 @@
             <% for(let i = 0; i<listaPedidos.length; i++) { %>
                 <tr>
                     <td><%= listaPedidos[i].pedidoId %></td>
-                    <td><%= listaPedidos[i].pedidoData %></td>
+                    <td><%= listaPedidos[i].pedidoData.toLocaleString() %></td>
                     <td><%= listaPedidos[i].produtoNome %></td>
                     <td>R$<%= listaPedidos[i].pedidoItemValor %></td>
                     <td><%= listaPedidos[i].pedidoItemQuantidade %></td>

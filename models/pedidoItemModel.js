@@ -9,6 +9,8 @@ class PedidoItemModel {
   #pedidoItemQuantidade
   #pedidoItemValor
   #pedidoItemValorTotal
+  #pedidoData
+  #produtoNome
 
   get pedidoItemId() {
     return this.#pedidodoItemId
@@ -51,6 +53,19 @@ class PedidoItemModel {
   set pedidoItemValorTotal(pedidoItemValorTotal) {
     this.#pedidoItemValorTotal = pedidoItemValorTotal
   }
+  get pedidoData() {
+    return this.#pedidoData
+  }
+  set pedidoData(pedidoData) {
+    this.#pedidoData = pedidoData
+  }
+
+  get produtoNome() {
+    return this.#produtoNome
+  }
+  set produtoNome(produtoNome) {
+    this.#produtoNome = produtoNome
+  }
 
   constructor(
     pedidodoItemId,
@@ -58,7 +73,9 @@ class PedidoItemModel {
     produtoId,
     pedidoItemQuantidade,
     pedidoItemValor,
-    pedidoItemValorTotal
+    pedidoItemValorTotal,
+    pedidoData,
+    produtoNome
   ) {
     this.#pedidodoItemId = pedidodoItemId
     this.#pedidoId = pedidoId
@@ -66,12 +83,23 @@ class PedidoItemModel {
     this.#pedidoItemQuantidade = pedidoItemQuantidade
     this.#pedidoItemValor = pedidoItemValor
     this.#pedidoItemValorTotal = pedidoItemValorTotal
+    this.#pedidoData = pedidoData
+    this.#produtoNome = produtoNome
   }
 
-  async listarPedidos() {
+  async listarPedidos(termo, tipoBusca) {
+    let whereFiltro = ""
+    if (termo) {
+      if (tipoBusca == "numero") {
+        whereFiltro = `where p.ped_id = ${termo}`
+      } else if (tipoBusca == "produto") {
+        whereFiltro = `where pr.prd_nome like '%${termo}%'`
+      }
+    }
+
     let sql = `select * from tb_pedido p 
                     inner join tb_pedidoitens i on p.ped_id = i.ped_id
-                    inner join tb_produto pr on i.prd_id = pr.prd_id order by p.ped_id`
+                    inner join tb_produto pr on i.prd_id = pr.prd_id ${whereFiltro} order by p.ped_id`
 
     let rows = await banco.ExecutaComando(sql)
 
@@ -138,6 +166,17 @@ class PedidoItemModel {
     let result = await banco.ExecutaComandoNonQuery(sql, valores)
 
     return result
+  }
+
+  toJSON() {
+    return {
+      pedidoId: this.#pedidoId,
+      dataPedido: this.#pedidoData,
+      produto: this.#produtoNome,
+      valorUnitario: this.#pedidoItemValor,
+      quantidade: this.#pedidoItemQuantidade,
+      valorTotal: this.#pedidoItemValorTotal,
+    }
   }
 }
 
