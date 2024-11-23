@@ -168,7 +168,7 @@ class ProdutoModel {
     if (rows.length > 0) {
       var row = rows[0]
 
-      let imagem = "/img/produto-sem-foto.png"
+      let imagem = "/img/produtos/" + row["prd_imagem"]
       if (
         row["prd_imagem"] != null &&
         fs.existsSync(
@@ -207,7 +207,7 @@ class ProdutoModel {
       for (let i = 0; i < rows.length; i++) {
         var row = rows[i]
 
-        let imagem = "/img/produto-sem-foto.png"
+        let imagem = row["prd_imagem"]
         if (
           row["prd_imagem"] != null &&
           fs.existsSync(
