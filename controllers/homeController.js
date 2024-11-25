@@ -1,14 +1,9 @@
-
 class HomeController {
+  constructor() {}
 
-    constructor() {
-
-    }
-
-    homeView(req, res) {
-        res.render('home/index', {});
-    }
+  homeView(req, res) {
+    res.render("home/index", {})
+  }
 }
 
-
-module.exports = HomeController;
+module.exports = HomeController

@@ -1,14 +1,12 @@
-const PerfilModel = require("../models/perfilModel");
+const PerfilModel = require("../models/perfilModel")
 
 class PerfilController {
+  async listagemView(req, res) {
+    let perfilModel = new PerfilModel()
+    let lista = await perfilModel.listar()
 
-    async listagemView(req, res) {
-        let perfilModel = new PerfilModel();
-        let lista = await perfilModel.listar();
-
-        res.render('perfil/listagem', { listaPerfil: lista })
-    }
-
+    res.render("perfil/listagem", { listaPerfil: lista })
+  }
 }
 
-module.exports = PerfilController;
+module.exports = PerfilController

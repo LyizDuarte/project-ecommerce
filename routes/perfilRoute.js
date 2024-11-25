@@ -1,10 +1,10 @@
-const express = require('express');
-const PerfilController = require('../controllers/perfilController');
+const express = require("express")
+const PerfilController = require("../controllers/perfilController")
 
-let router = express.Router();
+let router = express.Router()
 
-let ctrl = new PerfilController();
+let ctrl = new PerfilController()
 
-router.get('/', ctrl.listagemView);
+router.get("/", ctrl.listagemView)
 
-module.exports = router;
+module.exports = router

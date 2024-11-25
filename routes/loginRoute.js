@@ -1,11 +1,10 @@
-const express = require('express');
-const LoginController = require('../controllers/loginController');
+const express = require("express")
+const LoginController = require("../controllers/loginController")
 
-const router = express.Router();
+const router = express.Router()
 
-let ctrl = new LoginController();
-router.get('/', ctrl.loginView);
-router.post('/validar', ctrl.login);
+let ctrl = new LoginController()
+router.get("/", ctrl.loginView)
+router.post("/validar", ctrl.login)
 
-
-module.exports = router;
+module.exports = router
